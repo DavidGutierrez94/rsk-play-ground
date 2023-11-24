@@ -9,7 +9,8 @@ import (
 
 	"strconv"
 
-	"github.com/davidgutierrez94/rsk-play-ground/internal/blockchain"
+	"github.com/DavidGutierrez94/rsk-play-ground/internal/blockchain"
+
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
@@ -86,13 +87,13 @@ func sendTransaction(w http.ResponseWriter, r *http.Request) {
 	recipientAddress := r.URL.Query().Get("recipientAddress")
 	amount, _ := strconv.ParseUint(r.URL.Query().Get("amount"), 10, 32)
 
-	RskNodeURL := "https://rsk.getblock.io/b9ef1fcf-8731-42e5-a7af-39c44b7bf055/testnet/"
+	nodeURL := "https://staging-v3.skalenodes.com/v1/staging-fast-active-bellatrix"
 
 	// Replace with your Ethereum private key
 	privateKey, _ := b.GetPrivateKey(uint32(index))
 
 	// Create an Ethereum client
-	client, err := ethclient.Dial(RskNodeURL)
+	client, err := ethclient.Dial(nodeURL)
 	if err != nil {
 		http.Error(w, "Failed to connect to the Ethereum client", http.StatusInternalServerError)
 		return
